@@ -2,7 +2,7 @@ const { ClientSession } = require("mongodb");
 const Product = require("../models/Products");
 
 
-exports.getProductsServices = async () => {
+exports.getProductsServices = async (filtered, queries) => {
     // const products = await Product.find({   })
     // const products = await Product.find({_id:'648ed732a3ccd2d13967c2da'})
     // const products = await Product.find({ status: 'out-of-stock' }) //
@@ -23,11 +23,21 @@ exports.getProductsServices = async () => {
     // const products = await Product.findById(undefined) // null is returned
 
     // const productService = await Product.where('name').equals(/\w/).where('price').gt(400)
-    const productService = await Product.find()
-    return productService;
+    // const productService = await Product.find({"status":"in-stock", "limit":3})
+    // const productService = await Product.find(queryData).sort("name price")
+    // const productService = await Product.find({}).sort(-"name quantity")
+
+    // const productService = await Product.find({}).sort(queries.sortBy).select(queries.fields)
+    // const productService = await Product.find({ price: { $gt: 200 } })
+    const productService = await Product.find(filtered).skip(queries.skip).limit(queries.limit).sort(queries.sortBy).select(queries.fields)
+
+    const productCount = await Product.countDocuments(productService)
+    const pageCount = Math.ceil(productCount / queries.limit)
+    console.log('pageCount: ', pageCount);
+    return { productCount, productService, };
 }
 
-
+// 
 exports.createProductService = async (data) => {
 
 
@@ -41,6 +51,7 @@ exports.createProductService = async (data) => {
     // const createProduct =await Product.create(data);
     return createProduct;
 }
+
 
 exports.updateProductService = async (productId, data) => {
     //---------------------------------------------------------------- options:1----------------------------------------------------------------
@@ -64,7 +75,8 @@ exports.updateProductService = async (productId, data) => {
 
 
 exports.bulkUpdateService = async (data) => {
-    // ---------------------------------------------------------------- update products with same data for all products
+    // ---------------------------------------------------------------- update products with same data for all given id products
+
     // const products = await Product.updateMany({ _id: data.ids }, data.data, {
     //     runValidation: true
     // });
@@ -78,6 +90,7 @@ exports.bulkUpdateService = async (data) => {
 
     });
     const result = await Promise.all(products);
+    // const result = await Product.updateMany({}, { $set: { unit: 'kg' } });
     console.log("promise: ", result);
     return result;
 
@@ -85,17 +98,18 @@ exports.bulkUpdateService = async (data) => {
 
 exports.deleteProductService = async (productId) => {
 
-    const result = await Product.deleteOne({ _id: productId }); 
-    
-    console.log("result: ",result);
+    const result = await Product.deleteOne({ _id: productId });
+
+    console.log("result: ", result);
     return result;
 };
 
 exports.bulkDeleteProductService = async (ids) => {
 
-    console.log("ids:", ids);
+    // console.log("ids:", ids);
 
-    const result = await Product.deleteMany({ _id: ids })
+    // const result = await Product.deleteMany({_id:ids});
+    const result = await Product.deleteMany({})
     console.log(result);
     return result;
 

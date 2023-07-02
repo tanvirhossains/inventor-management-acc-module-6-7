@@ -2,7 +2,12 @@ const express = require('express');
 const { ObjectId } = require('mongodb');
 const mongoose = require('mongoose');
 
-const productSchema = mongoose.Schema({
+const stockSchema = mongoose.Schema({
+    id: {
+        type: ObjectId,
+        required: true,
+        ref: "Product"
+    },
     name: {
         type: String,
         required: [true, "please provide a name for your product"],
@@ -43,6 +48,18 @@ const productSchema = mongoose.Schema({
             message: "please provide a valid image URL for your product",
         }
     }],
+    price: {
+        type: Number,
+        required: [true, "please provide a price for your product"],
+        min: [0, "Price must be greater than 0"],
+        max: [1000000000, "Price must be less than 1000000000"]
+    },
+    quantity: {
+        type: Number,
+        required: [true, "please provide a quantity for your product"],
+        min: [0, "quantity cannot be negative"],
+        max: [1000000000, "quantity must be less than 1000000000"]
+    },
     category: {
         type: String,
         required: [true, "please provide a category for your product"],
@@ -57,7 +74,45 @@ const productSchema = mongoose.Schema({
             ref: "Brand",
             required: true,
         }
-    }
+    },
+    status: {
+        type: String,
+        required: true,
+        enum: {
+            values: ['in-stock', "out-of-stock", "discontinued"],
+            message: `Status can't be ''{VALUE}'', must be either in-stock, out-of-stock or discontinued`
+        }
+    },
+    store: {
+        name: {
+            type: String,
+            require: [true, "please provide a store name!! "],
+            trim: true,
+            lowercase: true,
+            maxLength: 100,
+            enum: {
+                values: ["dhaka", "chittgong", "kulna", "sylhet", "barisal"],
+                message: "{VALUE} is not a valid store name.."
+            }
+        },
+        id: {
+            type: ObjectId,
+            required: true,
+            ref: "Store",
+        },
+    },
+    suppliedBy: {
+        name: {
+            type: String,
+            require: [true, "please provide a store name!! "],
+            trim: true,
+            lowercase: true,
+        },
+        id: {
+            type: ObjectId,
+            ref: "Supplier",
+        }
+    },
 
     // price will be changed depending on location of store and products
     // price: {
@@ -144,7 +199,7 @@ const productSchema = mongoose.Schema({
 
 
 
-const Product = mongoose.model('Product', productSchema);
+const Stock = mongoose.model('Stock', stockSchema);
 
 
-module.exports = Product;
+module.exports = Stock;

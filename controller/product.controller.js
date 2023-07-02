@@ -1,36 +1,73 @@
-
-const Product = require('../models/Products');
+// const Product = require('../models/Products');
 const { getProductsServices, createProductService, updateProductService, deleteProductService, bulkUpdateService, bulkDeleteProductService } = require('../services/product.services');
 
 module.exports.getProduct = async (req, res, next) => {
 
     try {
-        console.log('Getting Product');
-        // const products = await Product.find({   })
-        // const products = await Product.find({_id:'648ed732a3ccd2d13967c2da'})
-        // const products = await Product.find({ status: 'out-of-stock' }) //
-        // const products = await Product.find({ $or: [{ name: "Mouse" }, { _id: '648edd0e68d752ad7dcda229' }] }) //
-        // const products = await Product.find({ status: { $ne: "in-stock" } }) //ne = not equal to "in-stock"
-        // const products = await Product.find({ price: { $lt: 100 } }) //gt = getter than 
-        // const products = await Product.find({ name: { $in: ['Orange', 'Mango'] } }) //gt = getter than 
-        // const products = await Product.find({}, 'name price -_id') //only name price will be returned
-        // const products = await Product.find({}).sort({ price: -1 })
-        // const products = await Product.find({}).select({ name:1})
-        // const products = await Product.find({}).where("name").equals("Orange")
-        // const products = await Product.find({}).where("pirce").gt(100)
-        // const products = await Product.where("quantity").gt(100).limit(2)
-        // const products = await Product.where('name').all    (['Mango', 'Orange']);
-        // const products = await Product.where('status').equals('out-of-stock')
-        // const products =  await Product.where('name').equals(/\w/).where('price').gt(400)
-        // const products = await Product.findById("648edf5f4378b91deb6fd1e3")
-        // const products = await Product.findById(undefined) // null is returned
-        const products = await getProductsServices();
+
+        //---------------------------------------------------------------- filtering ----------------------------------------------------------------
+        console.log(req.query);
+        let filtered = { ...req.query };
+        console.log('filtered', filtered);
+
+        // --> gt, lt, gte, lte ->
+        const filteredString = JSON.stringify(filtered);
+        filtered = filteredString.replace(/\b(gt|lt|gte|lte)\b/g, match => `$${match}`);
+
+        filtered = JSON.parse(filtered);
+        console.log('matchedValue', filtered);
+
+        console.log('filteredString', filteredString);
+
+        // sort, page, limit -> exclude
+
+
+        const excludFields = ["sort", "page", "limit"]
+        excludFields.forEach(field => delete filtered[field]);
+
+        // sort 
+        // console.log("req query", req.query);
+        // console.log("excludFields", filtered)
+
+
+        //---------------------------------------------------------------- sorting and filtering----------------------------------------------------------------
+        const queries = {};
+
+        if (req.query.sort) {
+            const sortBy = req.query.sort.split(',').join(' ');
+            queries.sortBy = sortBy
+            console.log(sortBy);
+        }
+
+        if (req.query.fields) {
+            const fields = req.query.fields.split(',').join(' ');
+            queries.fields = fields
+            console.log(fields);
+        }
+
+
+        if (req.query.page) {
+            const { page = 1, limit = 10 } = req.query
+            const skip = (page - 1) * parseInt(limit);
+            queries.skip = skip;
+            queries.limit = Number(limit);
+        }
+
+        console.log(queries);
+        // const products = await getProductsServices(filtered);
+
+        const products = await getProductsServices(filtered, queries);
         console.log(products.length);
+
+
+
         res.status(200).json({
             status: 'success',
             message: 'Successfully retrieved all products',
             data: products
         })
+
+
 
     } catch (error) {
         res.status(400).json({
@@ -101,8 +138,24 @@ exports.updateProduct = async (req, res) => {
 }
 exports.bulkUpdate = async (req, res) => {
     try {
+        /* // request.body is
+           [
+        {
+            "id": "id of product",
+            "data": {
+                "price": "price of product",
+            }
+        },
+        {
+            "id": "id of product",
+            "data": {
+                "price": "price of product",
+            }
+        }
+    ] */
         console.log(req.body);
         const result = await bulkUpdateService(req.body);
+        // const result = await bulkUpdateService();
 
         res.status(200).json({
             status: 'success',
@@ -125,11 +178,10 @@ exports.deleteProduct = async (req, res, next) => {
         const { id } = req.params
         const result = await deleteProductService(id);
 
-        console.log("deleteprodu: ", result);
         if (!result.deletedCount) {
-          return  res.status(400).json({
+            return res.status(400).json({
                 status: 'failed',
-                message: "coudn't found any product",
+                message: "couldn't found any product",
             })
         }
         res.status(200).json({
@@ -158,7 +210,8 @@ exports.bulkDelete = async (req, res, next) => {
         // const filtered = await req.body.forEach(productId => { productId });
         // console.log("filtered", filtered);
 
-        const result = await bulkDeleteProductService(req.body);
+        // const result = await bulkDeleteProductService(req.body);
+        const result = await bulkDeleteProductService();
 
         res.status(200).json({
             status: 'success',
