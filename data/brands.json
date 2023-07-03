@@ -1,0 +1,34 @@
+[
+    {
+        "_id": "64a13a787ada23f8c3af1578",
+        "name": "ACI",
+        "description": "ACI lorem50 Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus, laudantium autem similique sequi officiis recusandae labore iste ea provident odio nulla aut quae, nemo quo nisi, harum eius quia excepturi? Necessitatibus, atque! Vel ipsa autem, eligendi temporibus  .",
+        "email": "aci@test.com",
+        "location": "Malalama is",
+        "updatedAt": {
+            "$date": "2023-07-02T09:09:05.913Z"
+        }
+    },
+    {
+        "_id": "64a13a787ada23f8c3af157a",
+        "name": "Rupchada",
+        "description": "rupchada lorem50 Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus, laudantium autem similique sequi officiis recusandae labore iste ea provident odio nulla aut quae, nemo quo nisi, harum eius quia excepturi? Necessitatibus, atque! Vel ipsa autem, eligendi temporibus  .",
+        "email": "rupchada@test.com",
+        "location": "findland",
+        "updatedAt": {
+            "$date": "2023-07-03T04:35:25.999Z"
+        },
+        "products": [
+            {
+                "$oid": "64a2500db639eb5728df019c"
+            }
+        ]
+    },
+    {
+        "_id": "64a13a787ada23f8c3af1579",
+        "name": "Fresh",
+        "description": "Fresh lorem50 Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus, laudantium autem similique sequi officiis recusandae labore iste ea provident odio nulla aut quae, nemo quo nisi, harum eius quia excepturi? Necessitatibus, atque! Vel ipsa autem, eligendi temporibus  .",
+        "email": "fresh@test.com",
+        "location": "Morocho"
+    }
+]

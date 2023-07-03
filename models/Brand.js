@@ -1,10 +1,13 @@
-const { ObjectId } = require('mongodb');
-const mongoose = require('mongoose');
-const validator = require('validator');
-const { objectId } = mongoose.Schema.Types
+const mongoose = require("mongoose");
+const validator = require("validator");
+
+const { ObjectId } = mongoose.Schema.Types
 
 const brandSchema = mongoose.Schema({
-
+    products: [{
+        type: ObjectId,
+        ref: "Product"
+    }],
     name: {
         type: String,
         require: [true, "please provide a brand name!! "],
@@ -12,7 +15,6 @@ const brandSchema = mongoose.Schema({
         maxLength: 100,
         unique: true,
         lowercase: true,
-
     },
     description: String,
     email: {
@@ -22,13 +24,10 @@ const brandSchema = mongoose.Schema({
     },
     website: {
         type: String,
-        validator: [validator.isURL, "Please provide a valid website.."],
+        validate: [validator.isURL, "Please provide a valid website.."],
     },
     location: String,
-    products: [{
-        type: ObjectId,
-        ref: "Product"
-    }],
+
     suppliers: [{ //
         name: String,
         constactNumber: String,
@@ -51,4 +50,4 @@ const brandSchema = mongoose.Schema({
 
 const Brand = mongoose.model("Brand", brandSchema)
 
-exports = Brand;
+module.exports = Brand;

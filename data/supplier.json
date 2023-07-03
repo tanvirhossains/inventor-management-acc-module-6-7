@@ -1,0 +1,35 @@
+[
+    {
+        "_id": {
+            "$oid": "64a2abf775ece6963aa84af9"
+        },
+        "name": "tavnir hossain moxumser",
+        "email": "tanvirhossaincou2020@gmail.com",
+        "brand": {
+            "name": "Rupchada",
+            "id": {
+                "$oid": "64a13a787ada23f8c3af157a"
+            }
+        },
+        "contactNumber": "01405778485",
+        "emergencyContactNumber": "01405784814",
+        "tradLicenceNumber": 14502488,
+        "presentAddress": "comilla , chittagon",
+        "parmanentAddress": "Dhaka norxhsnd",
+        "location": "dhaka",
+        "imageURL": [
+            "https://i.ibb.co/WnFSs9Y/unnamed.webp"
+        ],
+        "natioanalImageURL": [
+            "https://i.ibb.co/WnFSs9Y/unnamed.webp"
+        ],
+        "status": "active",
+        "createdAt": {
+            "$date": "2023-07-03T11:07:35.342Z"
+        },
+        "updatedAt": {
+            "$date": "2023-07-03T11:07:35.342Z"
+        },
+        "__v": 0
+    }
+]

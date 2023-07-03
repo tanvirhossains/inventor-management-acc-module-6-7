@@ -1,0 +1,32 @@
+[
+    {
+        "id": "64a2efc334d581dcc4ca6d8b",
+        "name": "dhaka",
+        "description": "String representation of the store name  as a string",
+        "status": "active"
+    },
+    {
+        "id": "64a2f02b52d337ef9ff363d3",
+        "name": "chittgong",
+        "description": "String representation of the store name  as a string",
+        "status": "active"
+    },
+    {
+        "id": "64a2f011e39687d26b44cebb",
+        "name": "khulna",
+        "description": "String representation of the store name  as a string",
+        "status": "active"
+    },
+    {
+        "id": "64a2f03752d337ef9ff363d5",
+        "name": "sylhet",
+        "description": "String representation of the store name  as a string",
+        "status": "active"
+    },
+    {
+        "id": "64a2f04552d337ef9ff363d7",
+        "name": "barisal",
+        "description": "String representation of the store name  as a string",
+        "status": "active"
+    }
+]

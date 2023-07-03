@@ -1,5 +1,6 @@
 const { ClientSession } = require("mongodb");
 const Product = require("../models/Products");
+const Brand = require("../models/Brand");
 
 
 exports.getProductsServices = async (filtered, queries) => {
@@ -29,7 +30,8 @@ exports.getProductsServices = async (filtered, queries) => {
 
     // const productService = await Product.find({}).sort(queries.sortBy).select(queries.fields)
     // const productService = await Product.find({ price: { $gt: 200 } })
-    const productService = await Product.find(filtered).skip(queries.skip).limit(queries.limit).sort(queries.sortBy).select(queries.fields)
+    // const productService = await Product.find(filtered).skip(queries.skip).limit(queries.limit).sort(queries.sortBy).select(queries.fields)
+    const productService = await Product.find({}).skip(2).limit(5).sort("name price")
 
     const productCount = await Product.countDocuments(productService)
     const pageCount = Math.ceil(productCount / queries.limit)
@@ -41,14 +43,22 @@ exports.getProductsServices = async (filtered, queries) => {
 exports.createProductService = async (data) => {
 
 
-    const product = new Product(data);
-    if (product.quantity === 0) {
-        product.status = "out-of-stock";
-    }
-    const createProduct = await product.save()
+    // const product = new Product(data);
+    // if (product.quantity === 0) {
+    //     product.status = "out-of-stock";
+    // }
+    // const createProduct = await product.save()
 
 
-    // const createProduct =await Product.create(data);
+    const createProduct = await Product.create(data);
+
+    const { _id: productId, brand } = createProduct;
+    // update brand 
+    const res = await Brand.updateOne({ _id: brand.id },
+        { $push: { products: productId } },
+    )
+    console.log("res: ", res);
+
     return createProduct;
 }
 

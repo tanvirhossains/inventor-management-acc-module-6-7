@@ -1,6 +1,9 @@
+
 const express = require('express');
-const { ObjectId } = require('mongodb');
 const mongoose = require('mongoose');
+const { ObjectId } = mongoose.Schema.Types
+const validator = require('validator');
+
 
 const productSchema = mongoose.Schema({
     name: {
@@ -26,25 +29,25 @@ const productSchema = mongoose.Schema({
     imageURLs: [{
         type: String,
         required: [true, "please provide a image URL for your product"],
-        validate: {
-            validator: (value) => {
-                if (!Array.isArray(value)) {
-                    return false;
-                }
-                let isValid = true;
-                value.forEach(url => {
-                    if (!validator.isURL(url)) {
-                        isValid = false;
-                    }
-                });
-                return isValid;
-            },
+        // validate: {
+        //     validator: (value) => {
+        //         if (!Array.isArray(value)) {
+        //             return false;
+        //         }
+        //         let isValid = true;
+        //         value.forEach(url => {
+        //             if (!validator.isURL(url)) {
+        //                 isValid = false;
+        //             }
+        //         });
+        //         return isValid;
+        //     },
 
-            message: "please provide a valid image URL for your product",
-        }
+        //     message: "please provide a valid image URL for your product",
+        // }
     }],
     category: {
-        type: String,
+        type: String, // suger/oil/rice
         required: [true, "please provide a category for your product"],
     },
     brand: {

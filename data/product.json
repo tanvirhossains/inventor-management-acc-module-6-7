@@ -1,66 +1,40 @@
 [
     {
-        "name": "Pran Chinigura Aromatic Rice - 5kg Bag",
-        "description": "Pran Chinigura Aromatic Rice (Polau). Fresh and Clean, Vacuum Packed. Pran Chinigura Rice can be use in Biriyani, Polau, Firni, Kheer, Khichuri.",
-        "price": 125,
-        "unit": "bag",
-        "qantity": 23,
-        "status": "in-stock"
-    },
-    {
-        "name": "Pran Chinigura Aromatic Rice - 50kg",
-        "description": "Pran Chinigura Aromatic Rice (Polau). Fresh and Clean, Vacuum Packed. Pran Chinigura Rice can be use in Biriyani, Polau, Firni, Kheer, Khichuri.",
-        "price": 125,
-        "unit": "bag",
-        "qantity": 23,
-        "status": "in-stock"
-    },
-    {
-        "name": "Pran Nazirshail Rice - 5kg",
-        "description": "Pran Nazirshail Rice. Fresh and Clean, Vacuum Packed. Pran Chinigura Rice can be use in Biriyani, Polau, Firni, Kheer, Khichuri.",
-        "price": 125,
-        "unit": "bag",
-        "qantity": 0,
-        "status": "out-of-stock"
-    },
-    {
-        "name": "Fresh Chinigura Rice",
-        "description": "Fresh Chinigura Rice. Fresh and Clean, Vacuum Packed. Fresh Chinigura Rice can be use in Biriyani, Polau, Firni, Kheer, Khichuri.",
-        "price": 125,
+        "name": "Fresh Chinigura Rice 1-kg",
+        "description": "Chinigura rice is a popular variety of aromatic rice known for its fragrance and excellent taste. It is primarily cultivated in Bangladesh and is highly sought after for its quality. If you're looking for a 1 kg package of fresh Chinigura rice, it is a standard size that is commonly available in the market.",
         "unit": "kg",
-        "qantity": 23,
-        "status": "in-stock"
+        "imageURLs": [
+            "http://imgae urli of fresh Chinigura Rice"
+        ],
+        "brand": {
+            "name": "Fresh",
+            "id": "64a13a787ada23f8c3af1579"
+        },
+        "category": "rice"
     },
     {
-        "name": "ACI Pure Miniket Rice Premium",
-        "description": "ACI Pure Miniket Rice Premium. Fresh and Clean, Vacuum Packed. ACI Pure Miniket Rice Premium can be use in Biriyani, Polau, Firni, Kheer, Khichuri.",
-        "price": 125,
+        "_id": {
+            "$oid": "64a2f418aef72c564f04264b"
+        },
+        "name": "Chashi Aromatic Chinigura Rice 1-kg",
+        "description": "Chinigura rice is a popular variety of aromatic rice known for its fragrance and excellent taste. It is primarily cultivated in Bangladesh and is highly sought after for its quality. If you're looking for a 1 kg package of fresh Chinigura rice, it is a standard size that is commonly available in the market.",
         "unit": "kg",
-        "qantity": 0,
-        "status": "out-of-stock"
-    },
-    {
-        "name": "Fresh Fortified Soyabean Oil - 5ltr",
-        "description": "Fresh Fortified Soyabean Oil follows 3 steps of refining process-Perfect Degumming & Neutralization, Balanced De-colorization and Five steps Deodorization to ensure right ratio of Omega 3 & 6 and intact Beta-carotene in Soyabean Oil. Fresh soyabean oil contain vitamin A. Its fresh and healthy.",
-        "price": 125,
-        "unit": "litre",
-        "qantity": 23,
-        "status": "in-stock"
-    },
-    {
-        "name": "Rupchanda Fortified Soyabean Oil - 5ltr",
-        "description": "First Vitamin A fortified Soyabean Oil. Increases immunity. Strengthens bone & teeth.",
-        "price": 125,
-        "unit": "litre",
-        "qantity": 23,
-        "status": "in-stock"
-    },
-    {
-        "name": "Fresh Refined Sugar",
-        "description": "Fresh Refined sugar is a modern processes of without touching hand to protect the health of assurance. Fresh refined sugar is completely acid, fecal residues free and neat and clean, healthy, granulated sugar.",
-        "price": 125,
-        "unit": "kg",
-        "qantity": 0,
-        "status": "out-of-stock"
+        "imageURLs": [
+            "http://imgae urli of fresh Chinigura Rice"
+        ],
+        "category": "rice",
+        "brand": {
+            "name": "ACI",
+            "id": {
+                "$oid": "64a13a787ada23f8c3af1578"
+            }
+        },
+        "createdAt": {
+            "$date": "2023-07-03T16:15:20.292Z"
+        },
+        "updatedAt": {
+            "$date": "2023-07-03T16:15:20.292Z"
+        },
+        "__v": 0
     }
 ]
